@@ -1,0 +1,80 @@
+parameters:
+  container_name:
+  container_key:
+  environment_name:
+  planfilename:
+  tfvarfilename:
+  root_directory:
+  service_connection_name:
+  backend_resource_group:
+  backend_storage_accountname:
+  storageAccountSku:
+  environment_name_Job:
+  terraformVersion: 
+  pool:
+    vmImage:
+
+stages:
+
+  - stage: Publish_Plan
+    jobs:
+    - template: azure-pipelines-v1.8-PublishPlan.yml
+      parameters:
+        container_name: ${{ parameters.container_name }}
+        container_key: ${{ parameters.container_key }}
+        environment_name: ${{ parameters.environment_name }}
+        planfilename: ${{ parameters.planfilename }}
+        tfvarfilename: ${{ parameters.tfvarfilename }}
+        root_directory: ${{ parameters.root_directory }}
+        service_connection_name: ${{ parameters.service_connection_name }}
+        backend_resource_group: ${{ parameters.backend_resource_group }}
+        backend_storage_accountname: ${{ parameters.backend_storage_accountname }}
+        backendAzureRmStorageAccountSku: ${{ parameters.backend_storageAccountSku }}
+        terraformVersion: ${{ parameters.terraformVersion }}
+        pool: ${{ parameters.pool }}
+
+  - stage: Validate
+    jobs:
+    - template: azure-pipelines-v1.8-Validate.yml
+      parameters:
+        container_name: ${{ parameters.container_name }}
+        container_key: ${{ parameters.container_key }}
+        environment_name: ${{ parameters.environment_name }}
+        planfilename: ${{ parameters.planfilename }}
+        tfvarfilename: ${{ parameters.tfvarfilename }}
+        root_directory: ${{ parameters.root_directory }}
+        service_connection_name: ${{ parameters.service_connection_name }}
+        backend_resource_group: ${{ parameters.backend_resource_group }}
+        backend_storage_accountname: ${{ parameters.backend_storage_accountname }}
+        backendAzureRmStorageAccountSku: ${{ parameters.backend_storageAccountSku }}
+        terraformVersion: ${{ parameters.terraformVersion }}
+        pool: ${{ parameters.pool }}
+
+  - stage: Deploy
+    condition: |
+      and(succeeded(),
+       eq(variables['build.sourceBranch'], 'refs/heads/main') 
+      )
+    dependsOn: "Validate"
+    jobs:
+      - deployment: ${{ parameters.environment_name_job }}
+        pool: 
+          vmImage: ${{ parameters.vmImage }}
+        displayName: Deploy
+        environment: ${{ parameters.environment_name }}
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+              - template: azure-pipelines-v1.8-Deploy.yml
+                parameters:
+                  container_name: ${{ parameters.container_name }}
+                  container_key: ${{ parameters.container_key }}
+                  environment_name: ${{ parameters.environment_name }}
+                  tfvarfilename: ${{ parameters.tfvarfilename }}
+                  root_directory: ${{ parameters.root_directory }}
+                  service_connection_name: ${{ parameters.service_connection_name }}
+                  backend_resource_group: ${{ parameters.backend_resource_group }}
+                  backend_storage_accountname: ${{ parameters.backend_storage_accountname }}
+                  backendAzureRmStorageAccountSku: ${{ parameters.backend_storageAccountSku }}
+                  terraformVersion: ${{ parameters.terraformVersion }}

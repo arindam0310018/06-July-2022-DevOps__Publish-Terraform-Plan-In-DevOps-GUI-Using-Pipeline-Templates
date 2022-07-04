@@ -1,0 +1,22 @@
+trigger:
+  none
+
+stages:
+  - template: ./azure-pipelines-v1.8-Main.yml
+    parameters:
+          container_name: "terraform"
+          container_key: "PUBLISH-TF-PLAN/LogaPublishTFPlan.tfstate"
+          environment_name: "NonProd"
+          planfilename: "tfplan"
+          tfvarfilename: "loga.tfvars"
+          root_directory: "/Publish-TF-Plan-In-GUI-DevOps-Templates"
+          service_connection_name: "amcloud-cicd-service-connection"
+          backend_resource_group: "tfpipeline-rg"
+          backend_storage_accountname: "tfpipelinesa"
+          storageAccountSku: "Standard_LRS"
+          pool:
+            vmImage: "ubuntu-latest"  
+          terraformVersion: "latest"
+          environment_name_Job: "ARINDAM_DEPLOYMENT"
+
+          

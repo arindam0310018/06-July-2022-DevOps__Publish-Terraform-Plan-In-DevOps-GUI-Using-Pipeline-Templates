@@ -1,0 +1,56 @@
+parameters:
+  container_name:
+  container_key:
+  environment_name:
+  planfilename:
+  tfvarfilename:
+  root_directory:
+  service_connection_name:
+  backend_resource_group:
+  backend_storage_accountname:
+  storageAccountSku:
+  environment_name_Job:
+  terraformVersion: 
+  pool:
+    vmImage:
+
+jobs:
+  - job: Publish_Plan
+    pool: ${{ parameters.pool }}
+    steps:
+# Install Terraform Installer in the Build Agent:-
+      - task: ms-devlabs.custom-terraform-tasks.custom-terraform-installer-task.TerraformInstaller@0
+        displayName: INSTALL TERRAFORM VERSION
+        inputs:
+          terraformVersion: ${{ parameters.terraformVersion }}
+# Terraform Init:-
+      - task: TerraformCLI@0
+        displayName: TERRAFORM INIT
+        inputs:
+          backendType: 'azurerm'
+          command: 'init'
+          workingDirectory: '$(System.DefaultWorkingDirectory)/${{ parameters.root_directory }}'
+          backendServiceArm: ${{ parameters.service_connection_name }} 
+          backendAzureRmResourceGroupName: ${{ parameters.backend_resource_group }}
+          backendAzureRmStorageAccountName: ${{ parameters.backend_storage_accountname }}
+          backendAzureRmStorageAccountSku: ${{ parameters.backend_storageAccountSku }}
+          backendAzureRmContainerName: ${{ parameters.container_name }}
+          backendAzureRmKey: ${{ parameters.container_key }}
+# Terraform Validate:-
+      - task: TerraformCLI@0
+        displayName: TERRAFORM VALIDATE
+        inputs:
+          backendType: 'azurerm'
+          command: 'validate'
+          workingDirectory: '$(System.DefaultWorkingDirectory)/${{ parameters.root_directory }}' 
+          environmentServiceName: ${{ parameters.service_connection_name }}
+# Terraform Plan:-
+      - task: TerraformCLI@0
+        displayName: TERRAFORM PLAN
+        inputs:
+          backendType: 'azurerm'
+          command: 'plan'
+          workingDirectory: '$(System.DefaultWorkingDirectory)/${{ parameters.root_directory }}'
+          commandOptions: "--var-file=${{ parameters.tfvarfilename }} --out=${{ parameters.planfilename }}"
+          environmentServiceName: ${{ parameters.service_connection_name }}
+          publishPlanResults: 'tfplan'

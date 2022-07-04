@@ -1,0 +1,5 @@
+rg-name         = "AMTESTRG100"
+rg-location     = "West Europe"
+loga-name       = "AMLOGA100"
+loga-sku        = "PerGB2018"
+loga-retention  = "30"
