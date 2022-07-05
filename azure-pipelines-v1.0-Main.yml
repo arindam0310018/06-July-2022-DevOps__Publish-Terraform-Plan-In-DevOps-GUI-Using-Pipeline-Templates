@@ -18,7 +18,7 @@ stages:
 
   - stage: Publish_Plan
     jobs:
-    - template: azure-pipelines-v1.8-PublishPlan.yml
+    - template: azure-pipelines-v1.0-PublishPlan.yml
       parameters:
         container_name: ${{ parameters.container_name }}
         container_key: ${{ parameters.container_key }}
@@ -35,7 +35,7 @@ stages:
 
   - stage: Validate
     jobs:
-    - template: azure-pipelines-v1.8-Validate.yml
+    - template: azure-pipelines-v1.0-Validate.yml
       parameters:
         container_name: ${{ parameters.container_name }}
         container_key: ${{ parameters.container_key }}
@@ -66,7 +66,7 @@ stages:
           runOnce:
             deploy:
               steps:
-              - template: azure-pipelines-v1.8-Deploy.yml
+              - template: azure-pipelines-v1.0-Deploy.yml
                 parameters:
                   container_name: ${{ parameters.container_name }}
                   container_key: ${{ parameters.container_key }}
