@@ -2,7 +2,7 @@ trigger:
   none
 
 stages:
-  - template: ./azure-pipelines-v1.8-Main.yml
+  - template: ./azure-pipelines-v1.0-Main.yml
     parameters:
           container_name: "terraform"
           container_key: "PUBLISH-TF-PLAN/LogaPublishTFPlan.tfstate"
