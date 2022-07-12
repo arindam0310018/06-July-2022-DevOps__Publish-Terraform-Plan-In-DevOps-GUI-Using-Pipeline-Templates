@@ -21,9 +21,6 @@ In this Session, I will demonstrate how to __Publish Terraform Plan in Azure Dev
 3. Azure Resource Manager Service Connection in Azure DevOps.
 4. __Azure Pipelines Terraform Tasks Extension by Charles Zipp__ Installed in Azure DevOps.
 
-| __CODE REPOSITORY:-__ |
-| --------- |
-| {% github arindam0310018/06-July-2022-DevOps__Publish-Terraform-Plan-In-DevOps-GUI-Using-Pipeline-Templates %} |
 
 | __EXTENSION DETAILS:-__ |
 | --------- |
