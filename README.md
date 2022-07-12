@@ -563,10 +563,8 @@ loga-retention  = "30"
 | __PIPELINE STAGE DEPLOY EXECUTED SUCCESSFULLY:-__ |
 | ![Image description](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/qsjnhxxin5ec5yymhhjy.png) |
 | __PIPELINE OVERALL EXECUTION STATUS:-__ |
-| ![Image description](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/hj9ufa5gknkwgy15o8gs.png)
-|
-| ![Image description](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/ljuwe1e2x13g0hexpo97.png)
-|
+| ![Image description](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/hj9ufa5gknkwgy15o8gs.png) |
+| ![Image description](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/ljuwe1e2x13g0hexpo97.png) |
 | __VALIDATE RESOURCES DEPLOYED IN PORTAL:-__ |
 | ![Image description](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/jfgc77po096s7ym6c7qf.png) |
 
@@ -574,9 +572,8 @@ loga-retention  = "30"
 | --------- |
 | Terraform Plan are __NOT PUBLISHED__ in Azure DevOps GUI unless there is a change in Infrastructure - __ADD__, __DESTROY__ or __CHANGE__ |
 | In order to demonstrate, the same pipeline was re-run. |
-| ![Image description](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/a26zt3v16u7ir7q0oh5v.png)
-|
-| ![Image description](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/0el20d405e5mc1eu5rmz.jpg)|
+| ![Image description](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/a26zt3v16u7ir7q0oh5v.png) |
+| ![Image description](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/0el20d405e5mc1eu5rmz.jpg) |
 | ![Image description](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/6g5numpn0v7gawk5oeid.png) |
 
 Hope You Enjoyed the Session!!!
